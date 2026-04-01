@@ -1,6 +1,7 @@
 import { prisma } from '../../../lib/prisma';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { getSecret } from '../../../utils/utils';
 
 export class OwnerAuthService {
   static async register(email: string, password: string) {
@@ -36,7 +37,7 @@ export class OwnerAuthService {
       throw new Error('Email or password wrong');
     }
 
-    const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+    const JWT_SECRET = getSecret();
 
     return jwt.sign({ id: shop.id }, JWT_SECRET, { expiresIn: '1d' });
   }

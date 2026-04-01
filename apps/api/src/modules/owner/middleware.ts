@@ -1,14 +1,32 @@
-import type { NextFunction, Request, Response } from 'express';
+import type { NextFunction, Response } from 'express';
+import jwt from 'jsonwebtoken';
+import { getSecret } from '../../utils/utils';
+
+// interface OwnerRequest extends Request {
+//   shopId: string;
+// } todo
 
 export const ownerAuthMiddleware = (
-  req: Request,
+  req: any,
   res: Response,
   next: NextFunction
 ) => {
-  const token = null;
+  const authorization = req.headers.authorization;
+
+  const token = authorization?.split(' ')[1];
 
   if (!token) {
-    return res.status(401).send('Unauthorized');
+    return res.status(401).send({ message: 'Unauthorized' });
+  }
+
+  const JWT_SECRET = getSecret();
+
+  try {
+    const tokenData = jwt.verify(token, JWT_SECRET) as { id: string };
+
+    req.shopId = tokenData.id;
+  } catch (e) {
+    return res.status(401).send({ message: 'Invalid token' });
   }
 
   return next();
