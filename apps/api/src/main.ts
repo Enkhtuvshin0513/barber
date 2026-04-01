@@ -7,14 +7,13 @@ import express from 'express';
 import * as path from 'path';
 
 import { ownerRouter } from './modules/owner/routes';
-import { ownerMiddleware } from './modules/owner/middleware';
 
 const app = express();
 
 app.use(express.json());
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
-app.use('/api/owner', ownerMiddleware, ownerRouter);
+app.use('/api/owner', ownerRouter);
 
 const port = process.env.PORT || 3333;
 const server = app.listen(port, () => {

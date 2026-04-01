@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
 
-export const ownerMiddleware = (
+export const ownerAuthMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction

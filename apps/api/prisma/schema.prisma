@@ -27,15 +27,15 @@ enum ShopType {
 
 model BarberShop {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  name       String
-  location   String
+  name       String?
+  location   String?
   email      String   @unique
-  phone      Int
-  profile    String
-  cover      String
-  contacts   Contact
+  phone      Int?
+  profile    String?
+  cover      String?
+  contacts   Contact?
   password   String
-  type       ShopType
+  type       ShopType?
   categories String[]
 
   @@map("barber_shop")
