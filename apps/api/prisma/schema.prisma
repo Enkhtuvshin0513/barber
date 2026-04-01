@@ -20,16 +20,22 @@ type Contact {
   website   String
 }
 
+enum ShopType {
+  shop
+  barber
+}
+
 model BarberShop {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   name       String
   location   String
   email      String   @unique
   phone      Int
+  profile    String
   cover      String
   contacts   Contact
   password   String
-  type       String
+  type       ShopType
   categories String[]
 
   @@map("barber_shop")

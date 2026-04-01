@@ -5,17 +5,16 @@
 
 import express from 'express';
 import * as path from 'path';
-import { prisma } from './lib/prisma';
+
+import { ownerRouter } from './modules/owner/routes';
+import { ownerMiddleware } from './modules/owner/middleware';
 
 const app = express();
 
+app.use(express.json());
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
-app.get('/api', async (req, res) => {
-  await prisma.barberShop.findMany();
-
-  res.send({ message: 'Welcome to api!' });
-});
+app.use('/api/owner', ownerMiddleware, ownerRouter);
 
 const port = process.env.PORT || 3333;
 const server = app.listen(port, () => {
