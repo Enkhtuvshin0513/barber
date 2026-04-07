@@ -15,9 +15,9 @@ datasource db {
 }
 
 type Contact {
-  facebook  String
-  instagram String
-  website   String
+  facebook  String?
+  instagram String?
+  website   String?
 }
 
 enum ShopType {

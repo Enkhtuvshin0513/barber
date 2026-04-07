@@ -7,4 +7,11 @@ export class ShopProfileService {
       omit: { password: true },
     });
   };
+
+  static updateProfile = async (shopId: string, data: any) => {
+    return prisma.barberShop.update({
+      where: { id: shopId },
+      data,
+    });
+  };
 }

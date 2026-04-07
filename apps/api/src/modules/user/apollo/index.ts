@@ -10,6 +10,14 @@ import { barberShopQueries } from '../apollo/resolvers/queries/barberShop';
 export const userApolloServer = new ApolloServer({
   typeDefs: `
     ${BarberTypes}
+    input PageInput {
+      page: Int
+    }
+
+    type PageInfo {
+      page: Int
+      totalCount: Int
+    }
 
     type Query {
       ${BarberQueries}

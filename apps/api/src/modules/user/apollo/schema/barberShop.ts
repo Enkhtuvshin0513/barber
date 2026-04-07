@@ -15,12 +15,17 @@ export const Types = `
     input BarbesShopFilter {
         name:        String
         location:    String
-        categories:  String
+        category:    String
+    }
+
+    type BaberListResponse {
+        data: [BarberShop]
+        pageInfo: PageInfo
     }
 `;
 
 export const Queries = `
-    barberShops(filter: BarbesShopFilter): [BarberShop]
+    barberShops(filter: BarbesShopFilter, pageInfo: PageInput): BaberListResponse
     barberShop(id: String): BarberShop
 `;
 

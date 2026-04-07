@@ -10,3 +10,14 @@ export const getProfile = async (req: any, res: Response) => {
     res.status(400).json({ message: 'error occured' });
   }
 };
+
+export const updateProfile = async (req: any, res: Response) => {
+  try {
+    const { data } = req.body;
+
+    const shop = await ShopProfileService.updateProfile(req.shopId, data);
+    res.json({ data: shop });
+  } catch (e: any) {
+    res.status(400).json({ message: e.message });
+  }
+};
