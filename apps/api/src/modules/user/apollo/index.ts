@@ -5,7 +5,10 @@ import {
   Mutations as BarberMutations,
 } from './schema/barberShop';
 
+import { Mutations as OrderMutations } from './schema/order';
+
 import { barberShopQueries } from '../apollo/resolvers/queries/barberShop';
+import { orderMutations } from './resolvers/mutations/order';
 
 export const userApolloServer = new ApolloServer({
   typeDefs: `
@@ -25,12 +28,13 @@ export const userApolloServer = new ApolloServer({
     
     type Mutation {
       ${BarberMutations}
+      ${OrderMutations}
     }
   `,
 
   resolvers: {
     Query: { ...barberShopQueries },
 
-    Mutation: {},
+    Mutation: { ...orderMutations },
   },
 });

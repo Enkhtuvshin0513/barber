@@ -15,16 +15,16 @@ export const barberShopQueries = {
 
     const skip = page * 10 - 10;
 
-    if (filter.name) {
+    if (filter?.name) {
       where.name = {
         contains: filter.name,
       };
     }
-    if (filter.location) {
+    if (filter?.location) {
       where.location = filter.location;
     }
 
-    if (filter.category) {
+    if (filter?.category) {
       where.categories = {
         has: filter.category,
       };
