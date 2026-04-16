@@ -16,11 +16,17 @@ export const orderMutations = {
       connection,
     });
 
-    myQueue.add('createOrder', {
-      barberShopId,
-      email,
-      phone,
-    });
+    myQueue.add(
+      'createOrder',
+      {
+        barberShopId,
+        email,
+        phone,
+      },
+      {
+        removeOnComplete: true,
+      }
+    );
 
     return true;
   },

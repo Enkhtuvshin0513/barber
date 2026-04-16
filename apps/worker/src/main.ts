@@ -3,7 +3,7 @@ import { Redis } from 'ioredis';
 
 const connection = new Redis({ maxRetriesPerRequest: null });
 
-const myWorker = new Worker(
+const orderWorker = new Worker(
   'orderQueue',
   async (job) => {
     if (job.name === 'createOrder') {
@@ -19,10 +19,10 @@ const myWorker = new Worker(
   }
 );
 
-myWorker.on('completed', (job) => {
+orderWorker.on('completed', (job) => {
   console.log(`Job with id ${job.id} has completed!`);
 });
 
-myWorker.on('failed', (job, err) => {
+orderWorker.on('failed', (job, err) => {
   console.error(`Job with id ${job?.id} has failed with error: ${err.message}`);
 });
