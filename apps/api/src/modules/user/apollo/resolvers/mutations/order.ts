@@ -1,5 +1,6 @@
 import { Redis } from 'ioredis';
 import { Queue } from 'bullmq';
+import { EmailService } from '../../../../utils/services/email';
 
 export const orderMutations = {
   createOrder: async (
@@ -12,11 +13,11 @@ export const orderMutations = {
   ) => {
     const connection = new Redis();
 
-    const myQueue = new Queue('orderQueue', {
+    const orderQueue = new Queue('orderQueue', {
       connection,
     });
 
-    myQueue.add(
+    orderQueue.add(
       'createOrder',
       {
         barberShopId,
@@ -28,6 +29,10 @@ export const orderMutations = {
       }
     );
 
-    return true;
+    const url = await EmailService.sendEmail(email, 'Order success', 'order', {
+      email: '3912831283901283901283908129hjsdjkahjkl',
+    });
+
+    return url;
   },
 };

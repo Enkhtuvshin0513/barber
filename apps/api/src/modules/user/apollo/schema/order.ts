@@ -1,3 +1,3 @@
 export const Mutations = `
-    createOrder(barberShopId: String, email: String, phone: Int): Boolean
+    createOrder(barberShopId: String, email: String, phone: Int): String
 `;
